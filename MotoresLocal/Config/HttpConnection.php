@@ -1,6 +1,6 @@
 <?php
 
- define('RAIZ', $_SERVER['DOCUMENT_ROOT']."/ultimo/MotoresLocal");
+ define('RAIZ', $_SERVER['DOCUMENT_ROOT']."/GDS/MotoresLocal");
 include_once (RAIZ.'/Model/XML.php'); 
 
 /**
