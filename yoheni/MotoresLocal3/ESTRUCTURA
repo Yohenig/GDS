@@ -1,0 +1,44 @@
+ESTRUCTURA
+
+OriginDestinationInformation
+	-->DepartureDateTime
+	-->OriginLocation
+	-->DestinationLocation
+	-->OriginDestinationOptions
+	   -->OriginDestinationOption
+	      -->FlightSegment {DepartureDateTime,ArrivalDateTime,StopQuantity,FlightNumber,JourneyDuration}
+	         -->DepartureAirport{LocationCode}
+	         -->ArrivalAirport{LocationCode}
+	         -->Equipment {AirEquipType}
+	         -->MarketingAirline{CompanyShortName}
+	         -->Meal{MealCode}
+	         -->MarketingCabin {CabinType,RPH}
+	         -->BookingClassAvail {ResBookDesigCode,ResBookDesigQuantity,RPH} //se repite varias veces
+	      -->End FlightSegment
+	    -->End OriginDestinationOption
+	 --> End OriginDestinationOptions
+--> End OriginDestinationInformation
+
+
+array OriginDestinationInformation['DepartureDateTime'=>'','OriginLocation'=>'','DestinationLocation'=>'','OriginDestinationOptions'=>OriginDestinationOptions[]];
+
+array OriginDestinationOptions['OriginDestinationOption'=>OriginDestinationOption[]];
+
+array OriginDestinationOption['FlightSegment'=>FlightSegment[]];
+
+array FlightSegment['DepartureDateTime'=>'','ArrivalDateTime'=>'','StopQuantity'=>'', 'FlightNumber'=>'','JourneyDuration'=>'','DepartureAirport'=>DepartureAirport[],'ArrivalAirport'=>ArrivalAirport[], Equipment[], MarketingAirline[],Meal[], MarketingCabin[], BookingClassAvail[] ];
+
+array DepartureAirport['LocationCode'=>''];
+
+array ArrivalAirport['LocationCode'=>''];
+
+array Equipment['AirEquipType'=>''];
+
+array MarketingAirline['CompanyShortName'=>''];
+
+array Meal['MealCode'=>''];
+
+array MarketingCabin['CabinType'=>'', 'RPH'=>''];
+
+array BookingClassAvail['ResBookDesigCode'=>'','ResBookDesigQuantity'=>'' ,'RPH'=>''];
+

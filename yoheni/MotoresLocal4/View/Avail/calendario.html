@@ -1,0 +1,65 @@
+<html>
+<head>
+	<title>Busqueda de Boletos</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" /> 
+	<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+ 
+ 
+     <link rel="stylesheet"  href=="../../webmaster/css/style.css" > 
+	<link rel="stylesheet" href="../../webmaster/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../webmaster/css/bootstrap-datetimepicker.css">
+	<link rel="stylesheet" type="text/css" href="../../webmaster/css/bootstrap-select.css"  >
+	<link rel="stylesheet" type="text/css" href="../../webmaster/css/css.css"  >
+
+  <script type="text/javascript" src="../../webmaster/js/app.js"></script>
+	<script type="text/javascript" src="../../webmaster/js/interfaz.js"></script>	
+		 <script src="../../webmaster/js/jquery.js"></script>
+		<script src="../../webmaster/js/bootstrap.js"></script>
+			<script src="../../webmaster/js/moment-with-locales.js"></script>
+			<script src="../../webmaster/js/bootstrap-datetimepicker.js"></script>
+			 <script src="../../webmaster/js/bootstrap-select.js"></script>
+    <script src="../../webmaster/js/bootstrap-spinner.js"></script>
+    <script src="../../webmaster/js/mousehold.js"></script>
+    <script src="../../webmaster/js/bootstrap-modal-popover.js"></script>
+     <script src="../../webmaster/js/moment.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class='col-md-5'>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker6'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-5'>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker7'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+</div>
+</body>
+</html>

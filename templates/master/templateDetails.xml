@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/2.5/template-install.dtd">
+<extension version="3.1" type="template" client="site">
+	<name>Master</name>
+	<version>1.0</version>
+	<creationDate>6/11/2015</creationDate>
+	<author>mojoomla.com</author>
+	<authorEmail>sales@mojoomla.com</authorEmail>
+	<copyright>Copyright (C) 2005 - 2015 mojoomla.com - All rights reserved.</copyright>
+	<description>
+		 <![CDATA[<link href="../templates/master/css/admin.css" rel="stylesheet" type="text/css" media="all" /> 
+      <div class="templateinfo"><h3><strong>MASTER Description</strong></h3>
+      <img src="../templates/master/images/template.jpg" border="0" title="" alt="img"/>
+      <br>
+	  <p>Template Links</p>
+      <p>Template Setup Guide <a href="#" target="_blank">Read Now</a><br />  
+      For Other Joomla Themes Click Here <a href="http://themeforest.net/user/dasinfomedia" target="_blank">Joomla Themes</a><br />
+      Follow us on Facebook <a href="http://www.facebook.com/mojoomla" target="_blank">Mojoomla Facebook</a>
+      <br /></p></div> ]]>
+	</description>
+	<files>
+		<folder>css</folder>
+		<folder>html</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>libraries</folder>
+		<folder>language</folder>
+		<folder>fonts</folder>
+		<folder>preset</folder>
+		<filename>error.php</filename>
+		<filename>favicon.ico</filename>
+		<filename>index.php</filename>
+		<filename>index.html</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_preview.png</filename>
+		<filename>template_thumbnail.png</filename>
+	</files>
+	
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.tpl_master.ini</language>
+		<language tag="ar-AA">ar-AA/ar-AA.tpl_master.ini</language>
+		<language tag="de-DE">de-DE/de-DE.tpl_master.ini</language>
+		<language tag="es-ES">es-ES/es-ES.tpl_master.ini</language>
+		<language tag="fr-FR">fr-FR/fr-FR.tpl_master.ini</language>
+		<language tag="el-GR">el-GR/gr-GR.tpl_master.ini</language>
+		<language tag="it-IT">it-IT/it-IT.tpl_master.ini</language>
+		<language tag="ja-JP">ja-JP/ja-JP.tpl_master.ini</language>
+		<language tag="nb-NO">nb-NO/nb-NO.tpl_master.ini</language>
+		<language tag="nl-NL">nl-NL/nl-NL.tpl_master.ini</language>
+		<language tag="pt-PT">pt-PT/pt-PT.tpl_master.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.tpl_master.ini</language>
+		<language tag="sv-SE">sv-SE/sv-SE.tpl_master.ini</language>
+		<language tag="zh-CN">zh-CN/zh-CN.tpl_master.ini</language>
+	</languages>
+	
+	<positions>
+		<position>mj-master-menu</position>
+		<position>mj-master-slideshow</position>
+		<position>mj-master-slideshow2</position>
+		<position>mj-master-feature</position>
+		<position>mj-master-choose</position>
+		<position>mj-master-team</position>
+		<position>mj-master-testimonial</position>
+		<position>mj-master-testimonial2</position>
+		<position>mj-master-counter</position>
+		<position>position-7</position>
+		<position>position-8</position>
+		<position>mj-master-video</position>
+		<position>mj-master-newsletter</position>
+		<position>mj-master-footermenu</position>
+		<position>mj-master-megamenu1</position>
+		<position>mj-master-megamenu2</position>
+		<position>mj-master-megamenu3</position>
+		<position>mj-master-megamenu4</position>
+		<position>mj-master-deal</position>
+		<position>mj-master-blogpost</position>
+		<position>mj-master-ourwork</position>
+		<position>mj-master-breadcrumbs</position>
+		<position>mj-master-contactus</position>
+		<position>mj-master-calendar</position>
+		<position>mj-master-map</position>
+		<position>mj-konw-more-about-us</position>
+		<position>mj-our-core-values</position>
+		<position>mj-brand</position>
+		<position>mj-master-slideshow</position>
+		<position>mj-master-slide</position>
+		<position>mj-master-footer-preset2</position>
+		<position>mj-master-about</position>
+		<position>mj-master-top-destination</position>
+		<position>mj-master-feature-tour</position>
+		<position>mj-master-feature-tour2</position>
+		<position>mj-master-search</position>
+		<position>mj-master-search-hotel</position>
+		<position>mj-master-search-flight</position>
+		<position>mj-master-search-tours</position>
+		
+		
+		
+	</positions>
+	
+	<config>
+		<fields name="params">
+			<fieldset name="THEME_OPTIONS">
+			  <field label="THEME_OPTIONS_INFO"  type="spacer" class="alert-blue"/>
+				<field name="logoFile" class="" type="media" default="" label="LOGO" description="LOGO_DESC" />
+				
+				
+				<field name="preset_detail" type="list" default="preset1" label="CHOOSE_YOUR_PRESET" description="CHOOSE_YOUR_PRESET_DESC">
+			  	  <option value="preset1">Preset1</option>
+				  <option value="preset2">Preset2</option>
+			    </field>
+				
+			    <field name="theme_color" type="color" default="#e74c3c" label="SELECT_COLOR" description="SELECT_COLOR_DESC" />
+				
+				<field name="chooselayout" type="list" default="full" label="CHOOSE_LAYOUT" description="CHOOSE_LAYOUT_DESC" >
+					<option value="full">Full Layout</option>
+					<option value="boxed">Boxed Layout</option>
+				</field>
+			    <field name="choosepattern" type="list" default="default" label="CHOOSE_PATTERN" description="CHOOSE_PATTERN_DESC" >
+					<option value="default">Pattern Default</option>
+					<option value="1">Pattern 1</option>
+					<option value="2">Pattern 2</option>
+					<option value="3">Pattern 3</option>
+					<option value="4">Pattern 4</option>
+					<option value="5">Pattern 5</option>
+					<option value="6">Pattern 6</option>
+		  	    </field>
+			  
+			    <field name="responsive_layout" type="radio" label="RESPONSIVE_LAYOUT" description="RESPONSIVE_LAYOUT_DESC" default="1" checked="checked" class="btn-group">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				
+				<field type="spacer" name="@spacer11" hr="true"/>
+				<field type="spacer" name="TOUR_DEAL_SETTINGS" class="admin_main_head" label="TOUR_DEAL_SETTINGS"/>
+				<field label="TOUR_DEAL_INFO" type="spacer" class="alert-blue"/>	
+				<field name="deal_img" class="" type="media" default="" label="DEAL_IMG" description="DEAL_IMG_DESC" />
+				<field name="deal_title" type="text" size="60" label="TITLE" description="DEAL_TITLE_DESC"/>
+				
+				<field type="spacer" name="@spacer06" hr="true"/>
+				<field type="spacer" name="SOCIAL_SETTINGS" class="admin_main_head" label="SOCIAL_SETTINGS"/>
+				<field label="SOCIAL_LINK_INFO"  type="spacer" class="alert-blue"/>	
+				<field name="s_link1" type="text" size="60" label="G+_LINK" description="SOCIAL_LINK_DESC1"/>
+				<field name="s_link2" type="text" size="60" label="TUMBLR_LINK" description="SOCIAL_LINK_DESC2"/>
+				<field name="s_link3" type="text" size="60" label="FB_LINK" description="SOCIAL_LINK_DESC3"/>
+				<field name="s_link4" type="text" size="60" label="VIMEO_LINK" description="SOCIAL_LINK_DESC4"/>
+				<field name="s_link5" type="text" size="60" label="TWITTER_LINK" description="SOCIAL_LINK_DESC5"/>
+				<field name="s_link6" type="text" size="60" label="RSS_LINK" description="SOCIAL_LINK_DESC6"/>
+				<field name="s_link7" type="text" size="60" label="DRIBBLE_LINK" description="SOCIAL_LINK_DESC7"/>
+				<field name="s_link8" type="text" size="60" label="PINTREST_LINK" description="SOCIAL_LINK_DESC8"/>
+				
+				<field type="spacer" name="@spacer07" hr="true"/>
+				<field type="spacer" name="CONTACT_DETAILS" class="admin_main_head" label="CONTACT_SETTINGS"/>
+				<field label="CONTACT_DETAIL_INFO"  type="spacer" class="alert-blue"/>
+
+				<field name="con_heading" type="text" label="CONTACT_HEADING_LINE" description="CONTACT_HEADING_LINE_DESC"/>
+				<field name="con_title" type="text" label="CONTACT_TITLE" description="CONTACT_TITLE_DESC"/>
+				<field name="con_button" type="text" label="CONTACT_BUTTON_NAME" description="CONTACT_BUTTON_NAME_DESC"/>
+				
+				<field name="con_name1" type="text" default="Email" label="CONTACT_DETAILS_NAME"  description="CONTACT_DETAILS_NAME_DESC"/>
+				<field name="con_value1" type="text" label="CONTACT_EMAIL"  description="CONTACT_EMAIL_DESC"/>
+				<field name="con_name2" type="text" default="Phone" label="CONTACT_DETAILS_NAME_PHONE" description="CONTACT_DETAILS_DESC"/>
+				<field name="con_value2" type="text" label="CONTACT_DTL" description="CONTACT_DTL_DESC"/>
+				
+			   
+			    <field type="spacer" name="@spacer08" hr="true"/>
+				  <field type="spacer" name="COPY_DETAILS" class="admin_main_head" label="COPYRIGHT_SETTINGS"/>
+			  <field label="COPYRIGHT_INFO"  type="spacer" class="alert-blue"/>
+			  <field name="copyright" type="text" size="50" label="COPYRIGHT_TEXT" description="COPYRIGHT_TEXT_DESC" />
+				
+			</fieldset>
+			<fieldset name="FEATURES_SECTION">
+				<field label="FEATURES_SECTION_INFO"  type="spacer" class="alert-blue"/>
+				
+				  <field name="fea_title" type="text" label="SECTION_TITLE" description="SECTION_TITLE_DESC"/>
+				  <field name="fea_bgimg" type="media" label="SECTION_BG_IMAGE" description="SECTION_BG_IMAGE_DESC"/>
+				  <field name="fea_sideimg" type="media" label="SECTION_SIDE_IMAGE" description="SECTION_SIDE_IMAGE_DESC"/>
+				  
+				  <field type="spacer" name="@spacer00" hr="true"/>
+				  <field type="spacer" name="Feature-1" class="adminhead" label="FEATURE-1" /> 
+				  <field name="fea_icon1" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="fea_title1" type="text" label="FEA_TITLE1" description="FEA_TITLE_DESC1"/>
+				  <field name="fea_desc1" type="textarea" label="FEA_DESCRIPTION1" description="FEA_DESCRIPTION_DESC" size="50"/>
+				 
+				  
+				  
+				  <field type="spacer" name="Feature-2" class="adminhead" label="FEATURE-2" />
+				   <field name="fea_icon2" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="fea_title2" type="text" label="FEA_TITLE2" description="FEA_TITLE_DESC2"/>
+				  <field name="fea_desc2" type="textarea" label="FEA_DESCRIPTION2" description="FEA_DESCRIPTION_DESC" size="50"/>
+				 
+				 
+				  
+				  <field type="spacer" name="Feature-3" class="adminhead" label="FEATURE-3" />
+				  <field name="fea_icon3" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="fea_title3" type="text" label="FEA_TITLE3" description="FEA_TITLE_DESC3"/>
+				  <field name="fea_desc3" type="textarea" label="FEA_DESCRIPTION3" description="FEA_DESCRIPTION_DESC" size="50"/>
+				 
+				
+				   
+				  <field type="spacer" name="Feature-4" class="adminhead" label="FEATURE-4" />
+				  <field name="fea_icon4" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="fea_title4" type="text" label="FEA_TITLE4" description="FEA_TITLE_DESC4"/>
+				  <field name="fea_desc4" type="textarea" label="FEA_DESCRIPTION4" description="FEA_DESCRIPTION_DESC" size="50"/>
+				  
+			</fieldset>
+			
+			<fieldset name="WHY_CHOOSE_SECTION">
+				<field label="WHY_CHOOSE_INFO"  type="spacer" class="alert-blue"/>
+				
+				  <field name="why_title" type="text" label="SECTION_TITLE" description="SECTION_TITLE_DESC"/>
+				  <field name="why_bgimg" type="media" label="SECTION_BG_IMAGE" description="SECTION_BG_IMAGE_DESC"/>
+				  
+				  <field type="spacer" name="@spacer01" hr="true"/>
+				  <field type="spacer" name="WHYCHOOSE-1" class="adminhead" label="DETAIL-1" /> 
+				  <field name="why_icon1" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="why_title1" type="text" label="DEAL_TITLE1" description="TITLE_DESC"/>
+				  <field name="why_desc1" type="textarea" label="DESCRIPTION1" description="DESCRIPTION_DESC" size="50"/>
+				 
+				  
+				  
+				  <field type="spacer" name="WHYCHOOSE-2" class="adminhead" label="DETAIL-2" />
+				   <field name="why_icon2" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="why_title2" type="text" label="DEAL_TITLE2" description="TITLE_DESC"/>
+				  <field name="why_desc2" type="textarea" label="DESCRIPTION2" description="DESCRIPTION_DESC" size="50"/>
+				 
+				 
+				  <field type="spacer" name="WHYCHOOSE-3" class="adminhead" label="DETAIL-3" />
+				  <field name="why_icon3" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="why_title3" type="text" label="DEAL_TITLE3" description="TITLE_DESC"/>
+				  <field name="why_desc3" type="textarea" label="DESCRIPTION3" description="DESCRIPTION_DESC" size="50"/>
+				 
+				 
+				   
+				  <field type="spacer" name="WHYCHOOSE-4" class="adminhead" label="DETAIL-4" />
+				  <field name="why_icon4" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="why_title4" type="text" label="DEAL_TITLE4" description="TITLE_DESC"/>
+				  <field name="why_desc4" type="textarea" label="DESCRIPTION4" description="DESCRIPTION_DESC" size="50"/>
+				  
+			</fieldset>
+			
+			<fieldset name="TEAM_SECTION">
+				<field label="TEAM_SECTION_INFO"  type="spacer" class="alert-blue"/>
+				<field name="team_bgimg" type="media" label="SECTION_BG_IMAGE" description="SECTION_BG_IMAGE_DESC"/>
+				  
+				<field type="spacer" name="@spacer02" hr="true"/>
+				<field type="spacer" name="TEAM-1" class="adminhead" label="MEMBER-1" /> 
+				<field name="team_img1" type="media" label="MEMBER_IMG" description="MEMBER_IMG_DESC"/>
+				<field name="member_name1" type="text" default="" label="MEMBER_NAME" description="MEMBER_NAME_DESC" />
+				<field name="member_deg1" type="text" default="" label="MEMBER_DESIGNATION" description="MEMBER_DESIGNATION_DESC" />
+				<field name="member_desc1" type="textarea" default="" label="MEMBER_DESC" description="MEMBER_DESC_DESC" size="50" />
+				<field name="skill_name11" type="text" default="" label="SKILL_NAME1" description="SKILL_NAME_DESC" />
+				<field name="skill_value11" type="text" default="" label="SKILL_VALUE1" description="SKILL_VALUE_DESC" />
+				<field name="skill_name12" type="text" default="" label="SKILL_NAME2" description="SKILL_NAME_DESC" />
+				<field name="skill_value12" type="text" default="" label="SKILL_VALUE2" description="SKILL_VALUE_DESC" />
+				<field name="skill_name13" type="text" default="" label="SKILL_NAME3" description="SKILL_NAME_DESC" />
+				<field name="skill_value13" type="text" default="" label="SKILL_VALUE3" description="SKILL_VALUE_DESC" />
+				<field name="skill_name14" type="text" default="" label="SKILL_NAME4" description="SKILL_NAME_DESC" />
+				<field name="skill_value14" type="text" default="" label="SKILL_VALUE4" description="SKILL_VALUE_DESC" />
+				<field name="icon11" type="text" size="60" default="fa fa-facebook" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link11" type="text" size="60" default="http://www.facebook.com" label="SOCIAL_LINK1" description="SOCIAL_LINK_DESC"/>
+			    <field name="icon12" type="text" size="60" default="fa fa-dribbble" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link12" type="text" size="60" default="http://www.dribble.com" label="SOCIAL_LINK2" description="SOCIAL_LINK_DESC"/>
+				<field name="icon13" type="text" size="60" default="fa fa-twitter" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link13" type="text" size="60" default="http://www.twitter.com" label="SOCIAL_LINK3" description="SOCIAL_LINK_DESC"/>
+			  
+				
+				<field type="spacer" name="TEAM-2" class="adminhead" label="MEMBER-2" />
+				<field name="team_img2" type="media" label="MEMBER_IMG" description="MEMBER_IMG_DESC"/>
+				<field name="member_name2" type="text" default="" label="MEMBER_NAME" description="MEMBER_NAME_DESC" />
+				<field name="member_deg2" type="text" default="" label="MEMBER_DESIGNATION" description="MEMBER_DESIGNATION_DESC" />
+				<field name="member_desc2" type="textarea" default="" label="MEMBER_DESC" description="MEMBER_DESC_DESC" size="50" />
+				<field name="skill_name21" type="text" default="" label="SKILL_NAME1" description="SKILL_NAME_DESC" />
+				<field name="skill_value21" type="text" default="" label="SKILL_VALUE1" description="SKILL_VALUE_DESC" />
+				<field name="skill_name22" type="text" default="" label="SKILL_NAME2" description="SKILL_NAME_DESC" />
+				<field name="skill_value22" type="text" default="" label="SKILL_VALUE2" description="SKILL_VALUE_DESC" />
+				<field name="skill_name23" type="text" default="" label="SKILL_NAME3" description="SKILL_NAME_DESC" />
+				<field name="skill_value23" type="text" default="" label="SKILL_VALUE3" description="SKILL_VALUE_DESC" />
+				<field name="skill_name24" type="text" default="" label="SKILL_NAME4" description="SKILL_NAME_DESC" />
+				<field name="skill_value24" type="text" default="" label="SKILL_VALUE4" description="SKILL_VALUE_DESC" />
+				<field name="icon21" type="text" size="60" default="fa fa-facebook" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link21" type="text" size="60" default="http://www.facebook.com" label="SOCIAL_LINK1" description="SOCIAL_LINK_DESC"/>
+			    <field name="icon22" type="text" size="60" default="fa fa-dribbble" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link22" type="text" size="60" default="http://www.dribble.com" label="SOCIAL_LINK2" description="SOCIAL_LINK_DESC"/>
+				<field name="icon23" type="text" size="60" default="fa fa-twitter" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link23" type="text" size="60" default="http://www.twitter.com" label="SOCIAL_LINK3" description="SOCIAL_LINK_DESC"/> 
+					
+				<field type="spacer" name="TEAM-3" class="adminhead" label="MEMBER-3" />
+				<field name="team_img3" type="media" label="MEMBER_IMG" description="MEMBER_IMG_DESC"/>
+				<field name="member_name3" type="text" default="" label="MEMBER_NAME" description="MEMBER_NAME_DESC" />
+				<field name="member_deg3" type="text" default="" label="MEMBER_DESIGNATION" description="MEMBER_DESIGNATION_DESC" />
+				<field name="member_desc3" type="textarea" default="" label="MEMBER_DESC" description="MEMBER_DESC_DESC" size="50" />
+				<field name="skill_name31" type="text" default="" label="SKILL_NAME1" description="SKILL_NAME_DESC" />
+				<field name="skill_value31" type="text" default="" label="SKILL_VALUE1" description="SKILL_VALUE_DESC" />
+				<field name="skill_name32" type="text" default="" label="SKILL_NAME2" description="SKILL_NAME_DESC" />
+				<field name="skill_value32" type="text" default="" label="SKILL_VALUE2" description="SKILL_VALUE_DESC" />
+				<field name="skill_name33" type="text" default="" label="SKILL_NAME3" description="SKILL_NAME_DESC" />
+				<field name="skill_value33" type="text" default="" label="SKILL_VALUE3" description="SKILL_VALUE_DESC" />
+				<field name="skill_name34" type="text" default="" label="SKILL_NAME4" description="SKILL_NAME_DESC" />
+				<field name="skill_value34" type="text" default="" label="SKILL_VALUE4" description="SKILL_VALUE_DESC" />
+				<field name="icon31" type="text" size="60" default="fa fa-facebook" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link31" type="text" size="60" default="http://www.facebook.com" label="SOCIAL_LINK1" description="SOCIAL_LINK_DESC"/>
+			    <field name="icon32" type="text" size="60" default="fa fa-dribbble" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link32" type="text" size="60" default="http://www.dribble.com" label="SOCIAL_LINK2" description="SOCIAL_LINK_DESC"/>
+				<field name="icon33" type="text" size="60" default="fa fa-twitter" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link33" type="text" size="60" default="http://www.twitter.com" label="SOCIAL_LINK3" description="SOCIAL_LINK_DESC"/>   
+				
+				<field type="spacer" name="TEAM-4" class="adminhead" label="MEMBER-4" />
+				<field name="team_img4" type="media" label="MEMBER_IMG" description="MEMBER_IMG_DESC"/>
+				<field name="member_name4" type="text" default="" label="MEMBER_NAME" description="MEMBER_NAME_DESC" />
+				<field name="member_deg4" type="text" default="" label="MEMBER_DESIGNATION" description="MEMBER_DESIGNATION_DESC" />
+				<field name="member_desc4" type="textarea" default="" label="MEMBER_DESC" description="MEMBER_DESC_DESC" size="50" />
+				<field name="skill_name41" type="text" default="" label="SKILL_NAME1" description="SKILL_NAME_DESC" />
+				<field name="skill_value41" type="text" default="" label="SKILL_VALUE1" description="SKILL_VALUE_DESC" />
+				<field name="skill_name42" type="text" default="" label="SKILL_NAME2" description="SKILL_NAME_DESC" />
+				<field name="skill_value42" type="text" default="" label="SKILL_VALUE2" description="SKILL_VALUE_DESC" />
+				<field name="skill_name43" type="text" default="" label="SKILL_NAME3" description="SKILL_NAME_DESC" />
+				<field name="skill_value43" type="text" default="" label="SKILL_VALUE3" description="SKILL_VALUE_DESC" />
+				<field name="skill_name44" type="text" default="" label="SKILL_NAME4" description="SKILL_NAME_DESC" />
+				<field name="skill_value44" type="text" default="" label="SKILL_VALUE4" description="SKILL_VALUE_DESC" />
+				<field name="icon41" type="text" size="60" default="fa fa-facebook" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link41" type="text" size="60" default="http://www.facebook.com" label="SOCIAL_LINK1" description="SOCIAL_LINK_DESC"/>
+			    <field name="icon42" type="text" size="60" default="fa fa-dribbble" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link42" type="text" size="60" default="http://www.dribble.com" label="SOCIAL_LINK2" description="SOCIAL_LINK_DESC"/>
+				<field name="icon43" type="text" size="60" default="fa fa-twitter" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link43" type="text" size="60" default="http://www.twitter.com" label="SOCIAL_LINK3" description="SOCIAL_LINK_DESC"/>
+				  
+				<field type="spacer" name="TEAM-5" class="adminhead" label="MEMBER-5"/>
+				<field name="team_img5" type="media" label="MEMBER_IMG" description="MEMBER_IMG_DESC"/>
+				<field name="member_name5" type="text" default="" label="MEMBER_NAME" description="MEMBER_NAME_DESC" />
+				<field name="member_deg5" type="text" default="" label="MEMBER_DESIGNATION" description="MEMBER_DESIGNATION_DESC" />
+				<field name="member_desc5" type="textarea" default="" label="MEMBER_DESC" description="MEMBER_DESC_DESC" size="50" />
+				<field name="skill_name51" type="text" default="" label="SKILL_NAME1" description="SKILL_NAME_DESC" />
+				<field name="skill_value51" type="text" default="" label="SKILL_VALUE1" description="SKILL_VALUE_DESC" />
+				<field name="skill_name52" type="text" default="" label="SKILL_NAME2" description="SKILL_NAME_DESC" />
+				<field name="skill_value52" type="text" default="" label="SKILL_VALUE2" description="SKILL_VALUE_DESC" />
+				<field name="skill_name53" type="text" default="" label="SKILL_NAME3" description="SKILL_NAME_DESC" />
+				<field name="skill_value53" type="text" default="" label="SKILL_VALUE3" description="SKILL_VALUE_DESC" />
+				<field name="skill_name54" type="text" default="" label="SKILL_NAME4" description="SKILL_NAME_DESC" />
+				<field name="skill_value54" type="text" default="" label="SKILL_VALUE4" description="SKILL_VALUE_DESC" />
+				<field name="icon51" type="text" size="60" default="fa fa-facebook" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link51" type="text" size="60" default="http://www.facebook.com" label="SOCIAL_LINK1" description="SOCIAL_LINK_DESC"/>
+			    <field name="icon52" type="text" size="60" default="fa fa-dribbble" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link52" type="text" size="60" default="http://www.dribble.com" label="SOCIAL_LINK2" description="SOCIAL_LINK_DESC"/>
+				<field name="icon53" type="text" size="60" default="fa fa-twitter" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link53" type="text" size="60" default="http://www.twitter.com" label="SOCIAL_LINK3" description="SOCIAL_LINK_DESC"/>
+				
+				<field type="spacer" name="TEAM-6" class="adminhead" label="MEMBER-6"/>
+				<field name="team_img6" type="media" label="MEMBER_IMG" description="MEMBER_IMG_DESC"/>
+				<field name="member_name6" type="text" default="" label="MEMBER_NAME" description="MEMBER_NAME_DESC" />
+				<field name="member_deg6" type="text" default="" label="MEMBER_DESIGNATION" description="MEMBER_DESIGNATION_DESC" />
+				<field name="member_desc6" type="textarea" default="" label="MEMBER_DESC" description="MEMBER_DESC_DESC" size="50" />
+				<field name="skill_name61" type="text" default="" label="SKILL_NAME1" description="SKILL_NAME_DESC" />
+				<field name="skill_value61" type="text" default="" label="SKILL_VALUE1" description="SKILL_VALUE_DESC" />
+				<field name="skill_name62" type="text" default="" label="SKILL_NAME2" description="SKILL_NAME_DESC" />
+				<field name="skill_value62" type="text" default="" label="SKILL_VALUE2" description="SKILL_VALUE_DESC" />
+				<field name="skill_name63" type="text" default="" label="SKILL_NAME3" description="SKILL_NAME_DESC" />
+				<field name="skill_value63" type="text" default="" label="SKILL_VALUE3" description="SKILL_VALUE_DESC" />
+				<field name="skill_name64" type="text" default="" label="SKILL_NAME4" description="SKILL_NAME_DESC" />
+				<field name="skill_value64" type="text" default="" label="SKILL_VALUE4" description="SKILL_VALUE_DESC" />
+				<field name="icon61" type="text" size="60" default="fa fa-facebook" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link61" type="text" size="60" default="http://www.facebook.com" label="SOCIAL_LINK1" description="SOCIAL_LINK_DESC"/>
+			    <field name="icon62" type="text" size="60" default="fa fa-dribbble" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link62" type="text" size="60" default="http://www.dribble.com" label="SOCIAL_LINK2" description="SOCIAL_LINK_DESC"/>
+				<field name="icon63" type="text" size="60" default="fa fa-twitter" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC" />
+			    <field name="link63" type="text" size="60" default="http://www.twitter.com" label="SOCIAL_LINK3" description="SOCIAL_LINK_DESC"/>
+				
+			</fieldset>
+			
+			<fieldset name="TESTIMONIAL_SECTION">
+			   
+				<field label="TESTIMONIAL_INFO"  type="spacer" class="alert-blue"/>
+				  
+				  <field type="spacer" name="Client-1" class="adminhead" label="TESTI_CLIENT-1" /> 
+				  <field name="client_image1" type="media" label="CLIENT_IMAGE1" description="CLIENT_IMAGE_DESC"/>
+				  <field name="client_name1" type="text" label="CLIENT_NAME1" description="CLIENT_NAME_DESC"/>
+				  <field name="client_desc1" type="textarea" label="CLIENT_DESCRIPTION1" description="CLIENT_DESCRIPTION_DESC" size="50"/>
+				  
+				  <field type="spacer" name="Client-2" class="adminhead" label="TESTI_CLIENT-2" />
+				  <field name="client_image2" type="media" label="CLIENT_IMAGE2" description="CLIENT_IMAGE_DESC"/>
+				  <field name="client_name2" type="text" label="CLIENT_NAME2" description="CLIENT_NAME_DESC"/>
+				  <field name="client_desc2" type="textarea" label="CLIENT_DESCRIPTION2" description="CLIENT_DESCRIPTION_DESC" size="50"/>
+				
+				  <field type="spacer" name="Client-3" class="adminhead" label="TESTI_CLIENT-3" />
+				  <field name="client_image3" type="media" label="CLIENT_IMAGE3" description="CLIENT_IMAGE_DESC"/>
+				  <field name="client_name3" type="text" label="CLIENT_NAME3" description="CLIENT_NAME_DESC"/>
+				  <field name="client_desc3" type="textarea" label="CLIENT_DESCRIPTION3" description="Enter description" size="50"/>
+				  
+			</fieldset>
+			
+			<fieldset name="VIDEO_SECTION">
+				<field label="VIDEO_SECTION_INFO"  type="spacer" class="alert-blue"/>
+				  <field name="video_url" type="text" default="https://www.youtube.com/watch?v=7SnmCUwOsts" label="YOUTUBE_VIDEO_URL" description="YOUTUBE_VIDEO_URL_DESC"/>
+			</fieldset>
+			
+			<fieldset name="COUNTER_SECTION">
+			   
+				<field label="COUNTER_SECTION_INFO"  type="spacer" class="alert-blue"/>
+				  
+				  <field name="co_icon1" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="co_name1" type="text" label="NAME1" description="CO_NAME_DESC"/>
+				  <field name="co_value1" type="text" label="VALUE1" description="CO_VALUE_DESC"/>
+				  <field type="spacer" name="@spacer03" hr="true"/>
+				  <field name="co_icon2" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="co_name2" type="text" label="NAME2" description="CO_NAME_DESC"/>
+				  <field name="co_value2" type="text" label="VALUE2" description="CO_VALUE_DESC"/>
+				  <field type="spacer" name="@spacer04" hr="true"/>
+				  <field name="co_icon3" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="co_name3" type="text" label="NAME3" description="CO_NAME_DESC"/>
+				  <field name="co_value3" type="text" label="VALUE3" description="CO_VALUE_DESC"/>
+				  <field type="spacer" name="@spacer05" hr="true"/>
+				  <field name="co_icon4" type="text" label="FONTAWESOME_ICON" description="FONTAWESOME_ICON_DESC"/>
+				  <field name="co_name4" type="text" label="NAME4" description="CO_NAME_DESC"/>
+				  <field name="co_value4" type="text" label="VALUE4" description="CO_VALUE_DESC"/>
+				  
+			</fieldset>
+			<fieldset name="KNOW_MORE_ABOUT_US">
+						<field label="ABOUT_US" type="spacer" class="alert-blue" />
+						
+						<field label="PANEL1" type="spacer" class="adminhead"/>
+						<field name="acc_title1" type="text" label="DEAL_TITLE1" description="TITLE_DESC"/>
+						<field name="acc_desc1" type="textarea" label="DEAL_DESCRIPTION1" description="DETAIL_DESC"/>
+						
+						<field label="PANEL2" type="spacer" class="adminhead"/>
+						<field name="acc_title2" type="text" label="DEAL_TITLE2" description="TITLE_DESC"/>
+						<field name="acc_desc2" type="textarea" label="DEAL_DESCRIPTION2" description="DETAIL_DESC"/>
+						
+						<field label="PANEL3" type="spacer" class="adminhead"/>
+						<field name="acc_title3" type="text" label="DEAL_TITLE3" description="TITLE_DESC"/>
+						<field name="acc_desc3" type="textarea" label="DEAL_DESCRIPTION3" description="DETAIL_DESC"/>
+			</fieldset>
+			
+			<fieldset name="OUR_CORE_VALUES">
+						<field label="ABOUT_US_VALUES" class="alert-blue" type="spacer"/>
+						
+						
+						<field label="TAB1" type="spacer" class="adminhead" description="CUSTOMER_DESC"/>
+						<field name="image1" label="IMAGE1" type="media" description="IMAGE_DESC"/>
+						<field name="acc_title_1" type="text" label="TITLE_CORE_VALUES1" description="TITLE_DESC"/>
+						<field name="acc_desc_1" type="textarea" label="CORE_DESCRIPRION1" description="DETAIL_DESC_OUR_CORE"/>
+						
+						
+						<field label="TAB2" type="spacer" class="adminhead" description="TOUR_DESC"/>
+						<field name="image2" label="IMAGE2" type="media" description="IMAGE_DESC"/>
+						<field name="acc_title_2" type="text" label="TITLE_CORE_VALUES2" description="TITLE_DESC"/>
+						<field name="acc_desc_2" type="textarea" label="CORE_DESCRIPRION2" description="DETAIL_DESC_OUR_CORE"/>
+						
+						
+						<field label="TAB3" type="spacer" class="adminhead" description="CARRERS_DESC"/>
+						<field name="image3" label="IMAGE3" type="media" description="IMAGE_DESC"/>
+						<field name="acc_title_3" type="text" label="TITLE_CORE_VALUES3" description="TITLE_DESC"/>
+						<field name="acc_desc_3" type="textarea" label="CORE_DESCRIPRION3" description="DETAIL_DESC_OUR_CORE"/>
+
+			</fieldset>
+			
+			<fieldset name="BRAND_SLIDER">
+				
+				<field label="SLIDER" type="spacer" class="alert-blue" description="Iamge_slider"/>
+				
+				<field name="Heading" type="text" label="HEADING" description="HEADING_DESC"/>
+				<field name="Description" type="text" label="SLIDER_DESC" description="SLIDER_DESCRIPTION"/>
+				
+				
+				<field name="barand_image_1" label="BRANDIMAGE 1" type="media" description="IMAGE_DESC_SLIDER"/>
+				
+				
+				<field name="barand_image_2" label="BRANDIMAGE 2" type="media" description="IMAGE_DESC_SLIDER"/>
+				
+				
+				<field name="barand_image_3" label="BRANDIMAGE 3" type="media" description="IMAGE_DESC_SLIDER"/>
+				
+		
+				<field name="barand_image_4" label="BRANDIMAGE 4" type="media" description="IMAGE_DESC_SLIDER"/>
+				
+				
+				<field name="barand_image_5" label="BRANDIMAGE 5" type="media" description="IMAGE_DESC_SLIDER"/>
+				
+				
+				<field name="barand_image_6" label="BRANDIMAGE 6" type="media" description="IMAGE_DESC_SLIDER"/>
+			</fieldset>
+			
+			<fieldset name="ABOUT_MASTER">
+			<field label="ABOUT_MASTER_TEXT" type="spacer" class="alert-blue" description="about_master"/>
+			
+			<field name="about_image_1" label="ABOUT_LOGO" type="media" description="ABOUT_LOGO_DESC"/>
+			<field name="about_title_1" type="text" label="ABOUT_TITLE_1" description="ABOUT_TITLE_DESC"/>
+			
+			<field name="about_title1" type="text" label="ABOUT_TITLE1" description="ABOUT_TITLE"/>
+			<field name="about_desc_1" type="text" label="ABOUT_DESC1" description="ABOUT_DETAIL_DESC"/>
+			
+			<field name="about_title2" type="text" label="ABOUT_TITLE2" description="ABOUT_TITLE"/>
+			<field name="about_desc_2" type="text" label="ABOUT_DESC2" description="ABOUT_DETAIL_DESC"/>
+			
+			<field name="about_title3" type="text" label="ABOUT_TITLE3" description="ABOUT_TITLE"/>
+			<field name="about_desc_3" type="text" label="ABOUT_DESC3" description="ABOUT_DETAIL_DESC"/>
+			
+			<field name="about_title4" type="text" label="ABOUT_TITLE4" description="ABOUT_TITLE"/>
+			<field name="about_desc_4" type="text" label="ABOUT_DESC4" description="ABOUT_DETAIL_DESC"/>
+			
+			<field name="about_title5" type="text" label="ABOUT_TITLE5" description="ABOUT_TITLE"/>
+			<field name="about_desc_5" type="text" label="ABOUT_DESC5" description="ABOUT_DETAIL_DESC"/>
+			</fieldset>
+			<fieldset name="DETAILS_PAGE_SETUP">
+				<field label="TABS_ACCESS" type="spacer" class="alert-blue" description="tabs access"/>
+				<field name="tab_maps" type="radio" label="MAPS" description="MAPS_SETUP" default="1" checked="checked" class="btn-group">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field type="spacer" name="@spacer05" hr="true"/>
+				<field name="tab_calendar" type="radio" label="CALENDAR" description="CALENDAR_SETUP" default="1" checked="checked" class="btn-group">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

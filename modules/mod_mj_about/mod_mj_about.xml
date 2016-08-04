@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+    <name>About</name>
+    <author>master</author>
+    <version>3.0.0</version>
+    <description>About Module</description>
+	<files>
+		<filename module="mod_mj_about">mod_mj_about.php</filename>
+		<filename>index.html</filename>
+		<filename>mod_mj_about.xml</filename>
+		<filename>helper.php</filename>
+		<folder>tmpl</folder>	
+    </files>
+	
+	<config>
+	<fields name="params">
+		 
+		
+		<fieldset name="advanced">
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+			</fieldset>		
+	
+	
+	 
+		
+	</fields>
+</config>
+
+</extension>

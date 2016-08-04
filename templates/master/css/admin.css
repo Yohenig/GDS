@@ -1,0 +1,73 @@
+/*
+* @package Elos
+* @copyright (C) 2014 by mojoomla.com - All rights reserved!
+* @license GNU General Public License, version 2 (http://www.gnu.org/licenses/gpl-2.0.html)
+* @author mojoomla.com <sales@mojoomla.com>
+*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+body {
+   
+   font-family: "Open Sans",sans-serif!important;
+   
+}
+.mceEditor.defaultSkin {float: left;width: 100%;}
+.mceLayout {float: left;width:100%!important;}
+#editor-xtd-buttons {float: left;}
+.toggle-editor {float: left;padding-top: 10px;}
+.pane-toggler span, .pane-toggler-down span {background:url("../images/admin/grad1.png") repeat scroll 0 0 transparent;border:1px solid #d6d6d6;border-radius:5px 5px 5px 5px;box-shadow:1px 1px 1px #eee;clear:both;color:#333;display:block;font:bold 13px/43px Arial, Helvetica, sans-serif;height:40px;margin:5px;min-height:32px;padding:0 15px;position:relative;text-shadow:0 1px 1px #fff;text-transform:uppercase
+}
+.alert-blue {
+  background-color: #808080;
+  border-color: #808080;
+  border-radius: 2px;
+  clear: both;
+  color: #ffffff;
+  display: block;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  position: relative;
+  text-shadow: none;
+  width: 94%;
+}
+.alert-blue b
+{
+	font-size:18px;
+}
+.admin_main_head > label {
+    font-size: 24px;
+	text-transform: uppercase;
+	
+}
+hr
+{
+	margin:10px 0;
+}
+.nav-tabs {
+    background-color: #1a3867;
+    border-radius: 4px;
+  
+}
+.nav-tabs > li > a
+{
+	color:#fff;
+	border-radius: 0px;
+}
+.nav-tabs > li > a:hover, .nav-tabs > li > a:focus
+{
+color:#555555
+}
+.templateinfo img {float:left;padding:0 20px
+}
+.templateinfo p {padding:0 20px;max-width:600px;text-align:left;font-weight:normal
+}
+.templateinfo h3 {padding:10px 20px;font-weight:normal;letter-spacing:1.5px;font-size:22px;color:#888;text-transform:uppercase;background:#eee;border:1px solid #ddd;border-radius:5px
+}
+.adminform legend {background: none repeat scroll 0 0 #008BCE;border-radius: 3px 3px 3px 3px;color: #FFFFFF;font-size: 11px;margin-left: -2px;padding: 5px 15px !important;text-transform: uppercase;}
+.adminformlist > li {color: #3F3F3F;}
+fieldset.panelform label, fieldset.panelform div.paramrow label, fieldset.panelform span.faux-label {max-width: 100%;min-width: 170px;padding: 0 5px 0 0;}
+.adminformlist > li > label {font-size: 12px;font-weight: bold;}
+.adminhead > label {
+    font-size: 18px;
+}
