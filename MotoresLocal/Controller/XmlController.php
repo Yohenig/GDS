@@ -278,6 +278,7 @@ class XmlController{
 	/**
 	* Metodo que permite procesar los datos de la consulta de precios de KIU----------------------------------------------------------------------
 	*/
+	//Rafael Lizarazo AGREGADO PARA PROCESAR PRECIOS Y RESTRUCTURAR DATOS
 
 	function processAirPriceRQ($xml,$request,$response){
 
@@ -341,6 +342,574 @@ class XmlController{
 
 	}
 	//--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+	function processAirpriceRL($OriginDestinationInformation){
+
+		#echo "<pre>".htmlentities(print_r($OriginDestinationInformation, true)) ."</pre>";
+
+		$h=0;
+		$http = new HttpConnection();
+		$http->init();	
+		$count=0;
+		$count2=0;
+
+
+		if(count($OriginDestinationInformation)>0){
+			$count=count($OriginDestinationInformation[1]['OriginDestinationOptions']['OriginDestinationOption']);
+		}
+		
+		if ($OriginDestinationInformation[1]['TypeDest']==2) {
+			$count2=count($OriginDestinationInformation[2]['OriginDestinationOptions']['OriginDestinationOption']);			 
+		}
+
+
+		//----------------------------------------------------------------------------------------------------------------------------------------//
+		//----------------------------------------------------------------------------------------------------------------------------------------//
+		//----------------------------------------------------------------------------------------------------------------------------------------//
+		//----------------------------------------------------------------------------------------------------------------------------------------//
+		//DEVUELVE EL JSON RESTRUCTURADO CON LOS PRECIOS PARA VUELOS DE IDA
+		if ($OriginDestinationInformation[1]['TypeDest']==1) {
+
+			$currency = 'VEF';
+			$OriginDestinationInformation[1]['TypeGDS']='1';
+			$OriginDestinationInformation[1]['conversionRate']['conversionRateDetail']['currency']=$currency;
+
+			//$OriginDestinationInformation = count($OriginDestinationInformation); 
+			#$dataPrice=array();
+
+			$validar_precios=array();
+
+			for ($i=1; $i <=1 ; $i++) { 
+						$v=1;
+						$v2=0; //variable ṕara ordenar las recomendaciones
+
+				while($v<=$count){
+					//Informacion para vules directos/escala
+					#$flightCount=count($OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment']);
+					#$option_params = "{'SegmentsCount':" . $flightCount . ", 'Segments':Array(";
+
+
+
+
+					$dataPrice = array();
+					//Variables para totalizar el costo de todos los pasajeros
+					$TotalFare=0;
+					$BaseFare=0;
+					$ImpTasas=0;
+					$Cargos=0;
+					$BaseFareAdulto=0;
+					$BaseFareBebe=0;
+					$BaseFareNino=0;	
+					
+						for($z=1; $z<=count($OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment']);$z++){
+
+							$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['propFlightGrDetail'][0]['ref']=$v;					
+
+							$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['MarketingAirline']['OperatingCarrier'][0]='0';
+							$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['BookingClassAvail'][1]['productDetailQualifier'][0]='0';
+
+							$airline = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['MarketingAirline']['CompanyShortName'][0];
+							$dairport = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['DepartureAirport']['LocationCode'][0];	
+							$aairport = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['ArrivalAirport']['LocationCode'][0];
+
+
+							$flight = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['FlightNumber'][0];
+							$time =  $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['JourneyDuration'][0];
+							$ddatetime = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['DepartureDateTime'][0];
+							$adatetime = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['ArrivalDateTime'][0];
+							$stops = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['StopQuantity'][0];
+							$meal = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['Meal']['MealCode'][0];						
+							$adulto= $OriginDestinationInformation[1]['PassengerTypeQuantityAdulto'];
+							$bebe= $OriginDestinationInformation[1]['PassengerTypeQuantityBebe'];
+							$nino= $OriginDestinationInformation[1]['PassengerTypeQuantityNino'];
+							$mayor=$OriginDestinationInformation[1]['PassengerTypeQuantityMayor'];
+							$type=$OriginDestinationInformation[1]['TypeDest'];
+
+
+
+							$timeOfDeparture=substr($ddatetime, 10);
+							$timeOfArrival=substr($adatetime, 10);
+							$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['timeOfDeparture'][0]=$timeOfDeparture;
+							$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['timeOfArrival'][0]=$timeOfArrival;
+
+
+
+							//NOMBRE COMPLETO DE LA AEROLINEAS Y AEROPUERTOS
+							#$airline2=$properties->_getAirline($airline);
+							#$dairport2=$properties->_getCity($dairport);
+							#$aairport2=$properties->_getCity($aairport);
+
+
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['DepartureAirport']['LocationCode']=$dairport;
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['ArrivalAirport']['LocationCode']=$aairport;
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['FlightNumber']=$flight;
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['JourneyDuration']=$time;
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['DepartureDateTime']=$ddatetime;
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['ArrivalDateTime']=$adatetime;
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['StopQuantity']=$stops;
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['MarketingAirline']['CompanyShortName']=$airline;
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['Meal']['MealCode']=$meal;
+							$dataPrice['OriginDestinationOption'][1]['PassengerTypeQuantityAdulto']=$adulto;
+							$dataPrice['OriginDestinationOption'][1]['PassengerTypeQuantityBebe']=$bebe;
+							$dataPrice['OriginDestinationOption'][1]['PassengerTypeQuantityNino']=$nino;
+							$dataPrice['OriginDestinationOption'][1]['PassengerTypeQuantityMayor']=$mayor;
+							$dataPrice['OriginDestinationOption'][1]['TypeDest']=$type;
+
+							$available_classes = array();
+							foreach ( $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['BookingClassAvail'] as $bca) {
+								if (($bca['ResBookDesigQuantity'][0] >= '1') && ($bca['ResBookDesigQuantity'][0] <= '9')) {
+									$available_classes[] = $bca['ResBookDesigCode'][0];
+
+								}
+							}
+							if ($available_classes == array()) {
+								$option = false;
+								break;
+							}
+
+							$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['ResBookDesigCode']=$available_classes[0];
+							$class_list = "Array('" . implode("', '", $available_classes) . "')";
+
+							//----------------------------------------------------------------------------------------
+							//option_params es información repetida es preferible armarlo en la vista.
+							//-----------------------------------------------------------------------------------------
+							#$option_params .= "{MarketingAirline:'$airline', FlightNumber:$flight, DepartureDateTime:'$ddatetime', ArrivalDateTime:'$adatetime', ";
+							#$option_params .= "PassengerTypeQuantityAdulto:'$adulto', PassengerTypeQuantityNino:$nino, PassengerTypeQuantity3edad:'$mayor', PassengerTypeQuantitybebe:'$bebe', JourneyDuration:'$time', ";
+							#$option_params .= "DepartureAirport:'$dairport', ArrivalAirport:'$aairport', Destino:'1', Type:'$type', ResBookDesigCode:'$available_classes[0]', Classes:$class_list},";
+						}	
+
+					//MANEJO DE PRECIOS COMBINADOS-----------------------------------------
+	 				//Instancia con el xmlController
+
+					$request=$this->AirPriceRS($dataPrice);
+					$response= $http->post($request);
+					$xml = simplexml_load_string($response);
+					$price1=$this->processAirPriceRQ($xml,$request,$response);
+
+						if($price1!=null){
+							//Se agregan los precios al segmento de vuelos correspondientes
+							//if ($price1->getTotalFare()!=0.0) {
+							
+							/*	
+								$FlightSegment['TotalFare']=$price1->getTotalFare();
+								$FlightSegment['BaseFare']=$price1->getBaseFare();
+								$FlightSegment['ImpTasas']=$price1->getImpTasas();
+								$FlightSegment['Cargos']=$price1->getCargos();
+								$FlightSegment['BaseFareAdulto']=$price1->getBaseFareAdulto();
+								$FlightSegment['BaseFareBebe']=$price1->getBaseFareBebe();
+								$FlightSegment['BaseFareNino']=$price1->getBaseFareNino();
+								$FlightSegment['Error']=$price1->getError();
+								
+								$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]=$FlightSegment;
+							/**/	
+								//------------------------------------------------------------------------------------------------------------------------------
+
+								$fareTotal=$price1->getTotalFare();
+								$fareImp=$price1->getImpTasas();
+
+								$fareADT=$price1->getBaseFareAdulto();
+								$fareCHD=$price1->getBaseFareNino();
+								$fareINF=$price1->getBaseFareBebe();
+								//$fareYCD=$price1->getBaseFare3raedad();
+
+								if (in_array($fareTotal, $validar_precios)) {
+								   
+									// Colocar el id del FlightSegment en el segmentFlightRef que corresponde para agrupar por precio.
+									
+									$recpos = array_search($fareTotal, $validar_precios);
+
+									$sfrc= count($OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][0]['referencingDetail']);
+									$sfrc++;
+									
+									$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][$sfrc]['referencingDetail'][0]['refQualifier']='S';
+									$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][$sfrc]['referencingDetail'][0]['refNumber']=$v	;
+								
+
+								}else {
+									// Aqui se crea si no existe un precio, el cuerpo de la estructura del 'recommendation'
+
+									array_push($validar_precios, $fareTotal);
+
+								 
+									$pos=1;
+									$vpax=0; // variable para ordear el paxFare
+
+
+									$OriginDestinationInformation[1]['recommendation'][$v2]['recPriceInfo']['monetaryDetail'][0]['amount']=$fareTotal;
+									$OriginDestinationInformation[1]['recommendation'][$v2]['recPriceInfo']['monetaryDetail'][1]['amount']=$fareImp;
+
+									$OriginDestinationInformation[1]['recommendation'][$v2]['segmentFlightRef'][0]['referencingDetail'][0]['refQualifier']='S';
+									$OriginDestinationInformation[1]['recommendation'][$v2]['segmentFlightRef'][0]['referencingDetail'][0]['refNumber']=$v;
+
+									if ($adulto!=0) {
+										$paxADT['paxFareDetail']['paxFareNum'] = $pos++;
+										$paxADT['paxFareDetail']['totalFareAmount'] = $fareADT;
+										$paxADT['paxFareDetail']['totalTaxAmount'] = '0'; //No se de donde tomar los Impuestos de Adultos
+										$paxADT['paxReference']['ptc'] = 'ADT';
+										$OriginDestinationInformation[1]['recommendation'][$v2]['paxFareProduct'][$vpax]=$paxADT;
+										$vpax++;
+									}	
+
+									if ($nino!=0){
+										$paxCHD['paxFareDetail']['paxFareNum'] = $pos++;
+										$paxCHD['paxFareDetail']['totalFareAmount'] = $fareCHD;
+										$paxCHD['paxFareDetail']['totalTaxAmount'] = '0'; //No se de donde tomar los impuestos de los Niños
+										$paxCHD['paxReference']['ptc'] = 'CHD';
+										$OriginDestinationInformation[1]['recommendation'][$v2]['paxFareProduct'][$vpax]=$paxCHD;
+										$vpax++;
+									}
+
+									if ($mayor!=0){
+										$paxYCD['paxFareDetail']['paxFareNum'] = $pos++;
+										$paxYCD['paxFareDetail']['totalFareAmount'] = '0'; //$fareYCD //No se de donde tomar los precios de los 3ra Edad
+										$paxYCD['paxFareDetail']['totalTaxAmount'] = '0';  //No se de donde tomar los impuestos de los 3ra edad
+										$paxYCD['paxReference']['ptc'] = 'YCD';
+										$OriginDestinationInformation[1]['recommendation'][$v2]['paxFareProduct'][$vpax]=$paxYCD;
+										$vpax++;
+									}
+
+									if ($bebe!=0){
+										$paxINF['paxFareDetail']['paxFareNum'] = $pos++;
+										$paxINF['paxFareDetail']['totalFareAmount'] = $fareINF;
+										$paxINF['paxFareDetail']['totalTaxAmount'] = '0'; //No se de donde tomar los impuestos de los Infantes
+										$paxINF['paxReference']['ptc'] = 'INF';
+										$OriginDestinationInformation[1]['recommendation'][$v2]['paxFareProduct'][$vpax]=$paxINF;
+										$vpax;
+									}
+									$v2++;
+								}
+							
+
+						}
+					
+
+				$v++;
+				}// end While
+
+			}//end for
+
+		} //FIN DEL RESTRUCTURAMIENTO DE JSON IDA
+
+
+
+		//----------------------------------------------------------------------------------------------------------------------------------------//
+		//----------------------------------------------------------------------------------------------------------------------------------------//
+		//----------------------------------------------------------------------------------------------------------------------------------------//
+		//----------------------------------------------------------------------------------------------------------------------------------------//
+		//DEVUELVE EL JSON RESTRUCTURADO CON LOS PRECIOS PARA VUELOS DE IDA Y VUELTO
+		if ($OriginDestinationInformation[1]['TypeDest']==2) {
+
+			$currency = 'VEF';
+			$OriginDestinationInformation[1]['TypeGDS']='1';
+			$OriginDestinationInformation[1]['conversionRate']['conversionRateDetail']['currency']=$currency;
+
+			#echo count($OriginDestinationInformation).'<br />';
+			$validar_precios=array();
+			$dataPrice=array();
+			
+
+			for ($i=1; $i <=1 ; $i++) { //INICIO DEL FOR "A"
+				$v=1;
+				$v2=0;
+				
+				for ($j=$i+1; $j <=2 ; $j++) { //INICIO DEL FOR "B"
+
+				    while($v<=$count){
+			    		#echo 'Mientras '.$v.' sea menor o iguala ';
+						#echo $count.' <br /> SETEA!';
+
+
+						for ($x=1; $x <=$count2 ; $x++) { //INICIO DEL FOR "C"
+
+							$flightCount=count($OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment']);
+							$flightCount2=count($OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment']);
+
+							$dataPrice = array();
+							//Llamada al metodo AirPriceRQ para armar el xml-------------------------------------------------------------
+							$TotalFare=0;
+							$BaseFare=0;
+							$ImpTasas=0;
+							$Cargos=0;
+							$BaseFareAdulto=0;
+							$BaseFareBebe=0;
+							$BaseFareNino=0; //Variables para totalizar el costo de todos los pasajero
+
+							for($z=1; $z<=count($OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment']);$z++){ //INICIO DEL FOR "D"
+
+								$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['propFlightGrDetail'][0]['ref']=$v;
+								$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['MarketingAirline']['OperatingCarrier'][0]='0';
+								$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['BookingClassAvail'][1]['productDetailQualifier'][0]='0';
+
+								$dairport = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['DepartureAirport']['LocationCode'][0];
+								$aairport = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['ArrivalAirport']['LocationCode'][0];
+								$flight = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['FlightNumber'][0];
+								$time =  $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['JourneyDuration'][0];
+								$ddatetime = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['DepartureDateTime'][0];
+								$adatetime = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['ArrivalDateTime'][0];
+								$stops = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['StopQuantity'][0];
+								$airline = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['MarketingAirline']['CompanyShortName'][0];
+								$meal = $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['Meal']['MealCode'][0];						
+								$adulto= $OriginDestinationInformation[1]['PassengerTypeQuantityAdulto'];
+								$bebe= $OriginDestinationInformation[1]['PassengerTypeQuantityBebe'];
+								$nino= $OriginDestinationInformation[1]['PassengerTypeQuantityNino'];
+								$mayor=$OriginDestinationInformation[1]['PassengerTypeQuantityMayor'];
+								$type=$OriginDestinationInformation[1]['TypeDest'];
+
+								$timeOfDeparture=substr($ddatetime, 10);
+								$timeOfArrival=substr($adatetime, 10);
+								$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['timeOfDeparture'][0]=$timeOfDeparture;
+								$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['timeOfArrival'][0]=$timeOfArrival;
+
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['DepartureAirport']['LocationCode']=$dairport;
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['ArrivalAirport']['LocationCode']=$aairport;
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['FlightNumber']=$flight;
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['JourneyDuration']=$time;
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['DepartureDateTime']=$ddatetime;
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['ArrivalDateTime']=$adatetime;
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['StopQuantity']=$stops;
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['MarketingAirline']['CompanyShortName']=$airline;
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['Meal']['MealCode']=$meal;
+
+
+								$available_classes = array();
+								foreach ( $OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['FlightSegment'][$z]['BookingClassAvail'] as $bca) {
+									if (($bca['ResBookDesigQuantity'][0] >= '1') && ($bca['ResBookDesigQuantity'][0] <= '9')) {
+										$available_classes[] = $bca['ResBookDesigCode'][0];
+
+									}
+								}
+								if ($available_classes == array()) {
+									$option = false;
+									break;
+								}
+								$dataPrice['OriginDestinationOption'][$i]['FlightSegment'][$z]['ResBookDesigCode']=$available_classes[0];
+
+							} //FIN DEL FOR "D"
+
+							if($x<=$count2){ 
+								
+								for($y=1; $y<=count($OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment']);$y++){ //INICIO DEL FOR "E"
+
+
+									$OriginDestinationInformation[$i]['OriginDestinationOptions']['OriginDestinationOption'][$v]['propFlightGrDetail'][0]['ref']=$v;
+									$OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['MarketingAirline']['OperatingCarrier'][0]='0';
+									$OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['BookingClassAvail'][1]['productDetailQualifier'][0]='0';
+
+
+									$dairport = $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['DepartureAirport']['LocationCode'][0];
+									$aairport = $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['ArrivalAirport']['LocationCode'][0];
+									$flight = $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['FlightNumber'][0];
+									$time =  $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['JourneyDuration'][0];
+									$ddatetime = $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['DepartureDateTime'][0];
+									$adatetime = $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['ArrivalDateTime'][0];
+									$stops = $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['StopQuantity'][0];
+									$airline = $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['MarketingAirline']['CompanyShortName'][0];
+									$meal = $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['Meal']['MealCode'][0];						
+									$adulto= $OriginDestinationInformation[1]['PassengerTypeQuantityAdulto'];
+									$bebe= $OriginDestinationInformation[1]['PassengerTypeQuantityBebe'];
+									$nino= $OriginDestinationInformation[1]['PassengerTypeQuantityNino'];
+									$mayor=$OriginDestinationInformation[1]['PassengerTypeQuantityMayor'];
+									$type=$OriginDestinationInformation[1]['TypeDest'];
+
+									$timeOfDeparture=substr($ddatetime, 10);
+									$timeOfArrival=substr($adatetime, 10);
+									$OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['timeOfDeparture'][0]=$timeOfDeparture;
+									$OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['timeOfArrival'][0]=$timeOfArrival;
+
+
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['DepartureAirport']['LocationCode']=$dairport;
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['ArrivalAirport']['LocationCode']=$aairport;
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['FlightNumber']=$flight;
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['JourneyDuration']=$time;
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['DepartureDateTime']=$ddatetime;
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['ArrivalDateTime']=$adatetime;
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['StopQuantity']=$stops;
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['MarketingAirline']['CompanyShortName']=$airline;
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['Meal']['MealCode']=$meal;
+									$dataPrice['OriginDestinationOption'][1]['PassengerTypeQuantityAdulto']=$adulto;
+									$dataPrice['OriginDestinationOption'][1]['PassengerTypeQuantityBebe']=$bebe;
+									$dataPrice['OriginDestinationOption'][1]['PassengerTypeQuantityNino']=$nino;
+									$dataPrice['OriginDestinationOption'][1]['PassengerTypeQuantityMayor']=$mayor;
+									$dataPrice['OriginDestinationOption'][1]['TypeDest']=$type;
+
+									$available_classes = array();
+									foreach ( $OriginDestinationInformation[$j]['OriginDestinationOptions']['OriginDestinationOption'][$x]['FlightSegment'][$y]['BookingClassAvail'] as $bca) {
+										if (($bca['ResBookDesigQuantity'][0] >= '1') && ($bca['ResBookDesigQuantity'][0] <= '9')) {
+											$available_classes[] = $bca['ResBookDesigCode'][0];
+
+										}
+									}
+									if ($available_classes == array()) {
+										$option = false;
+										break;
+									}
+									$dataPrice['OriginDestinationOption'][$j]['FlightSegment'][$y]['ResBookDesigCode']=$available_classes[0];
+
+
+
+									#$OriginDestinationInformation = $dataPrice;
+
+
+								}//FIN DEL FOR "E"
+
+							} //FIN DEL IF
+
+							//MANEJO DE PRECIOS COMBINADOS ------------------------------------------------------------------------------------------------------
+																	 		
+							$request=$this->AirPriceRS($dataPrice);//llamado al metodo con el objeto @param priceModel2 para armar XML para obtener los precios por cada intinerario encontrado
+							$response= $http->post($request); // Procesando XML armado 
+							$xml = simplexml_load_string($response);//Tranformacion del xml en string
+							$price1=$this->processAirPriceRQ($xml,$request,$response); //Procesando los datos resultantes del precio
+
+
+							if($price1!=null) {
+
+								/*
+								$FlightSegment['TotalFare']=$price1->getTotalFare();
+								$FlightSegment['BaseFare']=$price1->getBaseFare();
+								$FlightSegment['ImpTasas']=$price1->getImpTasas();
+								$FlightSegment['Cargos']=$price1->getCargos();
+								$FlightSegment['BaseFareAdulto']=$price1->getBaseFareAdulto();
+								$FlightSegment['BaseFareBebe']=$price1->getBaseFareBebe();
+								$FlightSegment['BaseFareNino']=$price1->getBaseFareNino();
+								$FlightSegment['Error']=$price1->getError();
+
+								$f++;
+								$OriginDestinationInformation[3]['OriginDestinationOptions']['OriginDestinationOption'][$f]=$FlightSegment;
+
+								/**/
+
+
+								/*
+								$FlightSegment['TotalFare']=$price1['TotalFare:PriceModel:private'];
+								$FlightSegment['BaseFare']=$price1['BaseFare:PriceModel:private'];
+								$FlightSegment['ImpTasas']=$price1['impTasas:PriceModel:private'];
+								$FlightSegment['Cargos']=$price1['cargos:PriceModel:private'];
+								$FlightSegment['BaseFareAdulto']=$price1['BaseFareAdulto:PriceModel:private'];
+								$FlightSegment['BaseFareBebe']=$price1['BaseFareNino:PriceModel:private'];
+								$FlightSegment['BaseFareNino']=$price1['BaseFareBebe:PriceModel:private'];
+								$FlightSegment['Error']=$price1['Error:PriceModel:private'];
+								/**/
+
+								//--------------------------------------------------------------------------------------
+
+
+								
+
+
+								$fareTotal=$price1->getTotalFare();
+								$fareImp=$price1->getImpTasas();
+
+								$fareADT=$price1->getBaseFareAdulto();
+								$fareCHD=$price1->getBaseFareNino();
+								$fareINF=$price1->getBaseFareBebe();
+								//$fareYCD=$price1->getBaseFare3raedad();
+
+								if (in_array($fareTotal, $validar_precios)) {
+								   
+									// Colocar los id de los FlightSegment's correspondientes para agrupar las permutaciones por precio.
+									
+									$recpos = array_search($fareTotal, $validar_precios);
+
+									$sfrc= count($OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef']);
+									$sfrc++;
+
+
+																		
+									$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][$sfrc]['referencingDetail'][0]['refQualifier']='S';
+									$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][$sfrc]['referencingDetail'][0]['refNumber']=$v;
+
+									$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][$sfrc]['referencingDetail'][1]['refQualifier']='S';
+									$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][$sfrc]['referencingDetail'][1]['refNumber']=$x;
+								
+									//$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][$sfrc]['referencingDetail'][2]['refQualifier']='B';
+									//$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][$sfrc]['referencingDetail'][2]['refNumber']='???';
+
+								}else {
+									// Aqui se crea si no existe un precio, el cuerpo de la estructura del 'recommendation'
+
+									array_push($validar_precios, $fareTotal);
+
+								 
+									$pos=1;
+									$vpax=0; // variable para ordear el paxFare
+
+
+									$OriginDestinationInformation[1]['recommendation'][$v2]['recPriceInfo']['monetaryDetail'][0]['amount']=$fareTotal;
+									$OriginDestinationInformation[1]['recommendation'][$v2]['recPriceInfo']['monetaryDetail'][1]['amount']=$fareImp;
+
+									$OriginDestinationInformation[1]['recommendation'][$v2]['segmentFlightRef'][0]['referencingDetail'][0]['refQualifier']='S';
+									$OriginDestinationInformation[1]['recommendation'][$v2]['segmentFlightRef'][0]['referencingDetail'][0]['refNumber']=$v;
+
+									$OriginDestinationInformation[1]['recommendation'][$v2]['segmentFlightRef'][0]['referencingDetail'][1]['refQualifier']='S';
+									$OriginDestinationInformation[1]['recommendation'][$v2]['segmentFlightRef'][0]['referencingDetail'][1]['refNumber']=$x;
+
+									//$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][0]['referencingDetail'][2]['refQualifier']='B';
+									//$OriginDestinationInformation[1]['recommendation'][$recpos]['segmentFlightRef'][0]['referencingDetail'][2]['refNumber']='???';
+									
+
+									if ($adulto!=0) {
+										$paxADT['paxFareDetail']['paxFareNum'] = $pos++;
+										$paxADT['paxFareDetail']['totalFareAmount'] = $fareADT;
+										$paxADT['paxFareDetail']['totalTaxAmount'] = '0'; //No se de donde tomar los Impuestos de Adultos
+										$paxADT['paxReference']['ptc'] = 'ADT';
+										$OriginDestinationInformation[1]['recommendation'][$v2]['paxFareProduct'][$vpax]=$paxADT;
+										$vpax++;
+									}	
+
+									if ($nino!=0){
+										$paxCHD['paxFareDetail']['paxFareNum'] = $pos++;
+										$paxCHD['paxFareDetail']['totalFareAmount'] = $fareCHD;
+										$paxCHD['paxFareDetail']['totalTaxAmount'] = '0'; //No se de donde tomar los impuestos de los Niños
+										$paxCHD['paxReference']['ptc'] = 'CHD';
+										$OriginDestinationInformation[1]['recommendation'][$v2]['paxFareProduct'][$vpax]=$paxCHD;
+										$vpax++;
+									}
+
+									if ($mayor!=0){
+										$paxYCD['paxFareDetail']['paxFareNum'] = $pos++;
+										$paxYCD['paxFareDetail']['totalFareAmount'] = '0'; //$fareYCD //No se de donde tomar los precios de los 3ra Edad
+										$paxYCD['paxFareDetail']['totalTaxAmount'] = '0';  //No se de donde tomar los impuestos de los 3ra edad
+										$paxYCD['paxReference']['ptc'] = 'YCD';
+										$OriginDestinationInformation[1]['recommendation'][$v2]['paxFareProduct'][$vpax]=$paxYCD;
+										$vpax++;
+									}
+
+									if ($bebe!=0){
+										$paxINF['paxFareDetail']['paxFareNum'] = $pos++;
+										$paxINF['paxFareDetail']['totalFareAmount'] = $fareINF;
+										$paxINF['paxFareDetail']['totalTaxAmount'] = '0'; //No se de donde tomar los impuestos de los Infantes
+										$paxINF['paxReference']['ptc'] = 'INF';
+										$OriginDestinationInformation[1]['recommendation'][$v2]['paxFareProduct'][$vpax]=$paxINF;
+										$vpax;
+									}
+									$v2++;
+								}
+
+							}
+
+						} //FIN DEL FOR "C"
+						
+					$v++;
+					} //FIN DEL WHILE
+				
+				} //FIN DEL FOR "B"
+			
+			} //FIN DL FOR "A"									
+
+		} //FIN DEL RESTRUCTURAMIENTO DE JSON IDA Y VUELTA
+
+
+
+		$http->close();//Cerrar conexion al servidor KIU 
+
+		#echo "<pre>".htmlentities(print_r($OriginDestinationInformation, true)) ."</pre>";
+
+	return $OriginDestinationInformation;
+
+	}
+	
 
 	/**
 	* Metodo que permite construir el XML de AirBookRQ KIU--------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 <?php
 
-require('/../Config/propertiesXML.php');
-
+#require('/../Config/propertiesXML.php');
+require_once(__DIR__.'./../Config/propertiesXML.php'); //Rafael Lizarazo AGREGADO PARA LINUX
 class XMLModel{
 
 

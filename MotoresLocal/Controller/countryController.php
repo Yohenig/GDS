@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $uname = "root";
-$pass = "";
+$pass = "123456"; //Rafael Lizarazo Agregado pass de DB
 $database = "motores";
 
 $connection=mysql_connect($host,$uname,$pass) or die("connection in not ready <br>");

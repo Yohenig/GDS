@@ -52,6 +52,11 @@ $OriginDestinationInformation[1]['TypeDest']=$availModel->getTypeDest();
 //echo "<pre>".htmlentities(print_r($OriginDestinationInformation, true)) ."</pre>";
 //echo "<pre>".htmlentities(print_r($request, true)) ."</pre>";
 //echo "<pre>".htmlentities(print_r($response, true)) ."</pre>";
+
+//Rafael Lizarazo AGREGADO
+#Antes de enviar la variable al $OriginDestinationInformation ala vista para que la procese, la paso a traves de un metodo para poder consulta los precios primero.
+$OriginDestinationInformation=$xmlController->processAirpriceRL($OriginDestinationInformation);
+
 $xmlController->processView($OriginDestinationInformation,$http );
 
 ?>

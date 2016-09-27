@@ -4,7 +4,8 @@
 * Clase que Maneja todas las propiedades para la peticiones referente a AVAIL
 */
 
-require_once('/../Config/propertiesAVAIL.php');
+#require_once('/../Config/propertiesAVAIL.php');
+require_once(__DIR__.'/../Config/propertiesAVAIL.php'); //Rafael Lizarazo AGREGADO PARA LINUX
 
 class AvailModel {
 
